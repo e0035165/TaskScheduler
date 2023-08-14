@@ -12,7 +12,7 @@
 #include <functional>
 #include <fstream>
 #include <vector>
-#include <list>
+#include <set>
 using namespace std;
 
 string ltrim(const string &);
@@ -20,7 +20,16 @@ string rtrim(const string &);
 vector<string> split(const string &);
 void mergeSort(vector<int*>& setter, int begin, int end);
 void merger(vector<int*>& setter, int begin, int mid, int end);
+void taskScheduler(set<int>setter);
+int BiTree[100001];
+int arr[100001];
+vector<int>deadline_time[100000];
 
+
+void taskScheduler(set<int>setter)
+{
+    
+}
 
 void mergeSort(vector<int*>& setter, int begin, int end)
 {
@@ -87,29 +96,33 @@ int main(int argc, const char * argv[]) {
         cout << "File is open" << endl;
     }
     getline(input, q_temp);
+    
     //cout << q_temp << endl;
     int t = stoi(ltrim(rtrim(q_temp)));
     cout << t << endl;
-    vector<int*>setter;
+    set<int, greater<int>>setter;
+    
     for(int t_itr = 0; t_itr < t; t_itr++)
     {
         string first_multiple_input;
         getline(input, first_multiple_input);
         vector<string> firster = split(rtrim(first_multiple_input));
-        int* coacher = new int[2];
-        int d = stoi(firster[0]);
-        int m = stoi(firster[1]);
-        coacher[0] = d;
-        coacher[1] = m;
-        setter.push_back(coacher);
+        setter.insert(stoi(firster[0]));
+        deadline_time[stoi(firster[0])].push_back(stoi(firster[1]));
+        //mergeSort(setter, 0, setter.size()-1);
     }
-    mergeSort(setter, 0, setter.size()-1);
-    
-    for(auto x=setter.begin();x!=setter.end();++x)
+    //mergeSort(setter, 0, setter.size()-1);
+    cout << setter.size() << endl;
+    for(auto i : setter)
     {
-        cout << (*x)[0] << " ";
+        cout << i << " ";
     }
     cout << endl;
+//    for(auto x=setter.begin();x!=setter.end();++x)
+//    {
+//        cout << (*x)[0] << " ";
+//    }
+//    cout << endl;
     
     
     return 0;
